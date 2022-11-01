@@ -26,14 +26,14 @@ function beginApp() {
             type: 'list',
             message: 'What would you like to do?',
             choices: [
-                'View all roles',
-                'Add a role',
-                'View all departments',
-                'Add a department',
-                'View all employees',
-                'Add an employee',
-                'Update an employee role',
-                'Exit the app',
+                'View all roles', new inquirer.Separator(),
+                'Add a role', new inquirer.Separator(),
+                'View all departments', new inquirer.Separator(),
+                'Add a department', new inquirer.Separator(),
+                'View all employees', new inquirer.Separator(),
+                'Add an employee', new inquirer.Separator(),
+                'Update an employee role', new inquirer.Separator(),
+                'Exit the app', new inquirer.Separator(),
             ]
         }
         .then((answers) => {
