@@ -65,6 +65,20 @@ function beginApp() {
         })
     ])
 
+    function viewRoles() {}
+
+    function addRole() {}
+
+    function viewDepartments() {}
+
+    function addDepertment() {}
+
+    function viewEmployees() {}
+
+    function addEmployee() {}
+
+    function updateEmployeeRole() {}
+
     function endApp() {
         console.log('Exiting application. Thank you!')
         process.exit()
