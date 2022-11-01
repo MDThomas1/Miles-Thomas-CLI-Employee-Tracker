@@ -65,15 +65,27 @@ function beginApp() {
         })
     ])
 
-    function viewRoles() {}
+    function viewRoles() {
+        db.query()
+
+        beginApp()
+    }
 
     function addRole() {}
 
-    function viewDepartments() {}
+    function viewDepartments() {
+        db.query()
+
+        beginApp()
+    }
 
     function addDepertment() {}
 
-    function viewEmployees() {}
+    function viewEmployees() {
+        db.query()
+
+        beginApp()
+    }
 
     function addEmployee() {}
 
