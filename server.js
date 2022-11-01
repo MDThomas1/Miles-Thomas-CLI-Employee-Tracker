@@ -1,10 +1,12 @@
 const inquirer = require('inquirer')
 const mysql = require('mysql2')
 const express = require('express')
-const { default: Choices } = require('inquirer/lib/objects/choices')
 
 const app = express()
 const PORT = process.env.PORT || 3001
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 const db = mysql.createConnection(
     {
@@ -68,5 +70,9 @@ function beginApp() {
         process.exit()
     }
 }
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 
 beginApp()
