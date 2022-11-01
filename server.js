@@ -66,7 +66,7 @@ function beginApp() {
     ])
 
     function viewRoles() {
-        db.query()
+        db.query('SELECT * FROM roles')
 
         beginApp()
     }
@@ -74,7 +74,7 @@ function beginApp() {
     function addRole() {}
 
     function viewDepartments() {
-        db.query()
+        db.query('SELECT * FROM departments')
 
         beginApp()
     }
