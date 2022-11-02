@@ -66,7 +66,9 @@ function beginApp() {
     ])
 
     function viewRoles() {
-        db.query('SELECT * FROM roles')
+        db.query(`SELECT roles.title AS Title, roles.salary AS Salary, departments.name as Department
+        FROM roles
+        INNER JOIN departments ON roles.department_id = departments.id`)
 
         beginApp()
     }
