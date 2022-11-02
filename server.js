@@ -75,7 +75,7 @@ function beginApp() {
         inquirer 
         .prompt([
             {
-                name: 'departmentName',
+                name: 'roleName',
                 type: 'input',
                 message: 'What is the name of your new role?'
             }
@@ -100,7 +100,10 @@ function beginApp() {
                 message: 'What is the name of your new department?'
             }
         ])
-        .then((answers) => {})
+        .then((answers) => {
+            db.query(`INSERT INTO departments (id, name) 
+            VALUES (${answers.departmentName});`)
+        })
 
         beginApp()
     }
