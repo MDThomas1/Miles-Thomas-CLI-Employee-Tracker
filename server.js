@@ -91,7 +91,7 @@ function beginApp() {
             }
         ])
         .then((answers) => {
-            db.query(`INSERT INTO roles (id, title, salary, department_id)
+            db.query(`INSERT INTO roles (title, salary, department_id)
             VALUES (${answers.roleName}, ${answers.roleSalary}, ${answers.roleDepartment})`)
         })
 
@@ -99,7 +99,7 @@ function beginApp() {
     }
 
     function viewDepartments() {
-        db.query('SELECT * FROM departments')
+        db.query('SELECT name FROM departments AS Departments')
 
         beginApp()
     }
@@ -114,7 +114,7 @@ function beginApp() {
             }
         ])
         .then((answers) => {
-            db.query(`INSERT INTO departments (id, name) 
+            db.query(`INSERT INTO departments (name) 
             VALUES (${answers.departmentName});`)
         })
 
@@ -147,7 +147,7 @@ function beginApp() {
             }
         ])
         .then((answers) => {
-            db.query(`INSERT INTO employees (id, first_name, last_name, role_id, manager_id)
+            db.query(`INSERT INTO employees (first_name, last_name, role_id)
             VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${answers.employeeRole})`)
         })
 
