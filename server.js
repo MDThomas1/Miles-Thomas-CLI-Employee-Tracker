@@ -124,7 +124,9 @@ function beginApp() {
     }
 
     function viewEmployees() {
-        db.query('SELECT * FROM employees')
+        db.query(`SELECT employee.id AS ID, employees.first_name AS First_Name, employees.last_name AS Last_Name, roles.title AS Role, roles.salary AS salary 
+        FROM employees
+        INNER JOIN roles ON employees.role_id = roles.id`)
 
         beginApp()
     }
