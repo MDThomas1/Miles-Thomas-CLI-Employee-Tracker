@@ -71,7 +71,19 @@ function beginApp() {
         beginApp()
     }
 
-    function addRole() {}
+    function addRole() {
+        inquirer 
+        .prompt([
+            {
+                name: 'departmentName',
+                type: 'input',
+                message: 'What is the name of your new role?'
+            }
+        ])
+        .then((answers) => {})
+
+        beginApp()
+    }
 
     function viewDepartments() {
         db.query('SELECT * FROM departments')
@@ -79,17 +91,53 @@ function beginApp() {
         beginApp()
     }
 
-    function addDepertment() {}
-
-    function viewEmployees() {
-        db.query()
+    function addDepertment() {
+        inquirer 
+        .prompt([
+            {
+                name: 'departmentName',
+                type: 'input',
+                message: 'What is the name of your new department?'
+            }
+        ])
+        .then((answers) => {})
 
         beginApp()
     }
 
-    function addEmployee() {}
+    function viewEmployees() {
+        db.query('SELECT * FROM employees')
 
-    function updateEmployeeRole() {}
+        beginApp()
+    }
+
+    function addEmployee() {
+        inquirer 
+        .prompt([
+            {
+                name: 'employeeFirstName',
+                type: 'input',
+                message: "What is your new employee's first name?"
+            }
+        ])
+        .then((answers) => {})
+
+        beginApp()
+    }
+
+    function updateEmployeeRole() {
+        inquirer 
+        .prompt([
+            {
+                name: 'employeeFirstName',
+                type: 'list',
+                message: 'What is the first name of the employee you wish to edit?'
+            }
+        ])
+        .then((answers) => {})
+
+        beginApp()
+    }
 
     function endApp() {
         console.log('Exiting application. Thank you!')
