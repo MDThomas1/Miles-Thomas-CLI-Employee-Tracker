@@ -68,7 +68,9 @@ function beginApp() {
     function viewRoles() {
         db.query(`SELECT roles.title AS Title, roles.salary AS Salary, departments.name as Department
         FROM roles
-        INNER JOIN departments ON roles.department_id = departments.id`)
+        INNER JOIN departments ON roles.department_id = departments.id`, function (err, results) {
+            console.log(results)
+        })
 
         beginApp()
     }
@@ -101,7 +103,9 @@ function beginApp() {
     }
 
     function viewDepartments() {
-        db.query('SELECT name FROM departments AS Departments')
+        db.query('SELECT name FROM departments AS Departments', function (err, results) {
+            console.log(results)
+        })
 
         beginApp()
     }
@@ -126,7 +130,9 @@ function beginApp() {
     function viewEmployees() {
         db.query(`SELECT employee.id AS ID, employees.first_name AS First_Name, employees.last_name AS Last_Name, roles.title AS Role, roles.salary AS salary 
         FROM employees
-        INNER JOIN roles ON employees.role_id = roles.id`)
+        INNER JOIN roles ON employees.role_id = roles.id`, function (err, results) {
+            console.log(results)
+        })
 
         beginApp()
     }
