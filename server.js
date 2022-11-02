@@ -147,7 +147,8 @@ function beginApp() {
             }
         ])
         .then((answers) => {
-            db.query(``)
+            db.query(`INSERT INTO employees (id, first_name, last_name, role_id, manager_id)
+            VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${answers.employeeRole})`)
         })
 
         beginApp()
@@ -172,7 +173,9 @@ function beginApp() {
                 message: 'Which role does the employee now fulfill?'
             }
         ])
-        .then((answers) => {})
+        .then((answers) => {
+            db.query()
+        })
 
         beginApp()
     }
