@@ -90,7 +90,10 @@ function beginApp() {
                 message: 'What salary does your new role make?'
             }
         ])
-        .then((answers) => {})
+        .then((answers) => {
+            db.query(`INSERT INTO roles (id, title, salary, department_id)
+            VALUES (${answers.roleName}, ${answers.roleSalary}, ${answers.roleDepartment})`)
+        })
 
         beginApp()
     }
@@ -143,7 +146,9 @@ function beginApp() {
                 message: "What role does the new employee have?"
             }
         ])
-        .then((answers) => {})
+        .then((answers) => {
+            db.query(``)
+        })
 
         beginApp()
     }
