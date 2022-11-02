@@ -78,6 +78,16 @@ function beginApp() {
                 name: 'roleName',
                 type: 'input',
                 message: 'What is the name of your new role?'
+            },
+            {
+                name: 'roleDepartment',
+                type: 'input',
+                message: 'What department does your new role belong to?'
+            },
+            {
+                name: 'roleSalary',
+                type: 'input',
+                message: 'What salary does your new role make?'
             }
         ])
         .then((answers) => {})
@@ -121,6 +131,16 @@ function beginApp() {
                 name: 'employeeFirstName',
                 type: 'input',
                 message: "What is your new employee's first name?"
+            },
+            {
+                name: 'employeeLastName',
+                type: 'imput',
+                message: "What is your new employee's last name?"
+            },
+            {
+                name: 'employeeRole',
+                type: 'list',
+                message: "What role does the new employee have?"
             }
         ])
         .then((answers) => {})
@@ -135,6 +155,16 @@ function beginApp() {
                 name: 'employeeFirstName',
                 type: 'list',
                 message: 'What is the first name of the employee you wish to edit?'
+            },
+            {
+                name: 'employeeLastName',
+                type: 'list',
+                message: 'What is the last name of the employee you wish to edit?'
+            },
+            {
+                name: 'newEmployeeRole',
+                type: 'list',
+                message: 'Which role does the employee now fulfill?'
             }
         ])
         .then((answers) => {})
