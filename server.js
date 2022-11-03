@@ -22,7 +22,6 @@ app.listen(PORT, () => {
 });
 
 function beginApp() {
-    db.query(`SOURCE ./db/schema.sql;`)
 
 function homeScreen() {
 
@@ -212,6 +211,8 @@ function homeScreen() {
     function endApp() {
         console.log('Exiting application. Thank you!')
     }
+
+    homeScreen()
 }
 
 
