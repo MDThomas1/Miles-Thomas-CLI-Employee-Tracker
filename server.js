@@ -201,6 +201,7 @@ function homeScreen() {
 
     function endApp() {
         console.log('Exiting application. Thank you!')
+        process.exit()
     }
 
     homeScreen()
