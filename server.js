@@ -14,13 +14,12 @@ const db = mysql.createConnection(
       user: 'root',
       password: 'R3gg13@home',
       database: 'company_db'
-    },
-    console.log(`Connected to the company database.`)
+    }
 );
 
 function beginApp() {
 
-    db.query(`SOURCE ./db/schema.sql`)
+    db.query(`SOURCE ./db/schema.sql;`)
 
     inquirer
     .prompt([
@@ -39,34 +38,34 @@ function beginApp() {
                 'Exit the app', new inquirer.Separator(),
             ]
         }
-        .then((answers) => {
-            switch (answers.selections) {
-                case 'View all roles':
-                    viewRoles()
-                    break;
-                case 'Add a role':
-                    addRole()
-                    break;
-                case 'View all departments':
-                    viewDepartments()
-                    break;
-                case 'Add a department':
-                    addDepertment()
-                    break;
-                case 'View all employees':
-                    viewEmployees()
-                    break;
-                case 'Add an employee':
-                    addEmployee()
-                    break;
-                case 'Update an employee role':
-                    updateEmployeeRole()
-                default:
-                    endApp()
-                    break;
-            }
-        })
     ])
+    .then((answers) => {
+        switch (answers.selections) {
+            case 'View all roles':
+                viewRoles()
+                break;
+            case 'Add a role':
+                addRole()
+                break;
+            case 'View all departments':
+                viewDepartments()
+                break;
+            case 'Add a department':
+                addDepertment()
+                break;
+            case 'View all employees':
+                viewEmployees()
+                break;
+            case 'Add an employee':
+                addEmployee()
+                break;
+            case 'Update an employee role':
+                updateEmployeeRole()
+            default:
+                endApp()
+                break;
+        }
+    })
 
     function viewRoles() {
         db.query(`SELECT roles.title AS Title, roles.salary AS Salary, departments.name as Department
@@ -209,6 +208,6 @@ function beginApp() {
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-  });
+});
 
 beginApp()
