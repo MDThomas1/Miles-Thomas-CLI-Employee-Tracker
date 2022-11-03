@@ -97,7 +97,7 @@ function beginApp() {
             }
         ])
         .then((answers) => {
-            const selectedDepartment = db.query(`SELECT id FROM departments WHEN name = ${answers.roleDepartment};`)
+            const selectedDepartment = db.query(`SELECT id FROM departments WHERE name = ${answers.roleDepartment};`)
             db.query(`INSERT INTO roles (title, salary, department_id)
             VALUES (${answers.roleName}, ${answers.roleSalary}, ${selectedDepartment});`)
         })
@@ -131,7 +131,7 @@ function beginApp() {
     }
 
     function viewEmployees() {
-        db.query(`SELECT employee.id AS ID, employees.first_name AS First_Name, employees.last_name AS Last_Name, roles.title AS Role, roles.salary AS salary 
+        db.query(`SELECT employee.id AS ID, employees.first_name AS First_Name, employees.last_name AS Last_Name, roles.title AS Role, roles.salary AS Salary 
         FROM employees
         INNER JOIN roles ON employees.role_id = roles.id;`, function (err, results) {
             console.log(results)
@@ -162,7 +162,7 @@ function beginApp() {
             }
         ])
         .then((answers) => {
-            const selectedRole = db.query(`SELECT id FROM roles WHEN title = ${answers.employeeRole};`);
+            const selectedRole = db.query(`SELECT id FROM roles WHERE title = ${answers.employeeRole};`);
             db.query(`INSERT INTO employees (first_name, last_name, role_id)
             VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${selectedRole});`);
         })
