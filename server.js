@@ -19,6 +19,9 @@ const db = mysql.createConnection(
 );
 
 function beginApp() {
+
+    db.query(`SOURCE ./db/schema.sql`)
+
     inquirer
     .prompt([
         {
