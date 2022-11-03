@@ -68,7 +68,7 @@ function beginApp() {
     function viewRoles() {
         db.query(`SELECT roles.title AS Title, roles.salary AS Salary, departments.name as Department
         FROM roles
-        INNER JOIN departments ON roles.department_id = departments.id`, function (err, results) {
+        INNER JOIN departments ON roles.department_id = departments.id;`, function (err, results) {
             console.log(results)
         })
 
@@ -76,7 +76,7 @@ function beginApp() {
     }
 
     function addRole() {
-        const departmentList = db.query(`SELECT name FROM departments`)
+        const departmentList = db.query(`SELECT name FROM departments;`)
         inquirer 
         .prompt([
             {
@@ -97,16 +97,16 @@ function beginApp() {
             }
         ])
         .then((answers) => {
-            const selectedDepartment = db.query(`SELECT id FROM departments WHEN name = ${answers.roleDepartment}`)
+            const selectedDepartment = db.query(`SELECT id FROM departments WHEN name = ${answers.roleDepartment};`)
             db.query(`INSERT INTO roles (title, salary, department_id)
-            VALUES (${answers.roleName}, ${answers.roleSalary}, ${selectedDepartment})`)
+            VALUES (${answers.roleName}, ${answers.roleSalary}, ${selectedDepartment});`)
         })
 
         beginApp()
     }
 
     function viewDepartments() {
-        db.query('SELECT name FROM departments AS Departments', function (err, results) {
+        db.query('SELECT name FROM departments AS Departments;', function (err, results) {
             console.log(results)
         })
 
@@ -133,7 +133,7 @@ function beginApp() {
     function viewEmployees() {
         db.query(`SELECT employee.id AS ID, employees.first_name AS First_Name, employees.last_name AS Last_Name, roles.title AS Role, roles.salary AS salary 
         FROM employees
-        INNER JOIN roles ON employees.role_id = roles.id`, function (err, results) {
+        INNER JOIN roles ON employees.role_id = roles.id;`, function (err, results) {
             console.log(results)
         })
 
@@ -141,7 +141,7 @@ function beginApp() {
     }
 
     function addEmployee() {
-        const roleList = db.query(`SELECT title FROM roles`)
+        const roleList = db.query(`SELECT title FROM roles;`)
         inquirer 
         .prompt([
             {
@@ -162,35 +162,37 @@ function beginApp() {
             }
         ])
         .then((answers) => {
-            const selectedRole = db.query(`SELECT id FROM roles WHEN title = ${answers.employeeRole}`)
+            const selectedRole = db.query(`SELECT id FROM roles WHEN title = ${answers.employeeRole};`);
             db.query(`INSERT INTO employees (first_name, last_name, role_id)
-            VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${selectedRole})`)
+            VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${selectedRole});`);
         })
 
         beginApp()
     }
 
     function updateEmployeeRole() {
+        const employeeNameList = db.query(`SELECT CONCAT(first_name, " ", last_name FROM employees);`)
+        const roleList = db.query(`SELECT title FROM roles;`)
         inquirer 
         .prompt([
             {
-                name: 'employeeFirstName',
+                name: 'employeeName',
                 type: 'list',
-                message: 'What is the first name of the employee you wish to edit?'
-            },
-            {
-                name: 'employeeLastName',
-                type: 'list',
-                message: 'What is the last name of the employee you wish to edit?'
+                message: 'What is the name of the employee you wish to edit?',
+                choices: employeeNameList
             },
             {
                 name: 'newEmployeeRole',
                 type: 'list',
-                message: 'Which role does the employee now fulfill?'
+                message: 'Which role does the employee now fulfill?',
+                choices: roleList
+
             }
         ])
         .then((answers) => {
-            db.query()
+            const newRole = db.query(`SELECT id FROM roles WHERE title = ${answers.newEmployeeRole};`)
+            db.query(`UPDATE employees SET role_id = ${newRole} 
+            WHERE CONCAT(first_name, " ", last_name) = ${answers.employeeName};`)
         })
 
         beginApp()
