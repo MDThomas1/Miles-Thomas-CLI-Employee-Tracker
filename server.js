@@ -17,9 +17,16 @@ const db = mysql.createConnection(
     }
 );
 
-function beginApp() {
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
+function beginApp() {
     db.query(`SOURCE ./db/schema.sql;`)
+
+function homeScreen() {
+
+    db.query(`SOURCE db/schema.sql;`)
 
     inquirer
     .prompt([
@@ -61,11 +68,13 @@ function beginApp() {
                 break;
             case 'Update an employee role':
                 updateEmployeeRole()
-            default:
+                break;
+            case 'Exit the app':
                 endApp()
                 break;
         }
     })
+}    
 
     function viewRoles() {
         db.query(`SELECT roles.title AS Title, roles.salary AS Salary, departments.name as Department
@@ -74,7 +83,7 @@ function beginApp() {
             console.log(results)
         })
 
-        beginApp()
+        homeScreen()
     }
 
     function addRole() {
@@ -104,7 +113,7 @@ function beginApp() {
             VALUES (${answers.roleName}, ${answers.roleSalary}, ${selectedDepartment});`)
         })
 
-        beginApp()
+        homeScreen()
     }
 
     function viewDepartments() {
@@ -112,7 +121,7 @@ function beginApp() {
             console.log(results)
         })
 
-        beginApp()
+        homeScreen()
     }
 
     function addDepertment() {
@@ -129,7 +138,7 @@ function beginApp() {
             VALUES (${answers.departmentName});`)
         })
 
-        beginApp()
+        homeScreen()
     }
 
     function viewEmployees() {
@@ -139,7 +148,7 @@ function beginApp() {
             console.log(results)
         })
 
-        beginApp()
+        homeScreen()
     }
 
     function addEmployee() {
@@ -169,7 +178,7 @@ function beginApp() {
             VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${selectedRole});`);
         })
 
-        beginApp()
+        homeScreen()
     }
 
     function updateEmployeeRole() {
@@ -197,17 +206,14 @@ function beginApp() {
             WHERE CONCAT(first_name, " ", last_name) = ${answers.employeeName};`)
         })
 
-        beginApp()
+        homeScreen()
     }
 
     function endApp() {
         console.log('Exiting application. Thank you!')
-        process.exit()
     }
 }
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+
 
 beginApp()
