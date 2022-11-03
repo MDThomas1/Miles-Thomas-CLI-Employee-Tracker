@@ -22,6 +22,7 @@ const db = mysql.createConnection(
 });*/
 
 function beginApp() {
+    console.log('Welcome to the CLI company tracker app, please select an option to get started!')
 
 function homeScreen() {
 
@@ -107,6 +108,7 @@ function homeScreen() {
             const selectedDepartment = db.query(`SELECT id FROM departments WHERE name = ${answers.roleDepartment};`)
             db.query(`INSERT INTO roles (title, salary, department_id)
             VALUES (${answers.roleName}, ${answers.roleSalary}, ${selectedDepartment});`)
+            console.log('New department successfully created!')
             homeScreen()
         })
     }
@@ -130,8 +132,10 @@ function homeScreen() {
         .then((answers) => {
             db.query(`INSERT INTO departments (name) 
             VALUES (${answers.departmentName});`)
+            console.log('New department successfully created!')
             homeScreen()
-        })
+            }
+        )
     }
 
     function viewEmployees() {
@@ -168,6 +172,7 @@ function homeScreen() {
             const selectedRole = db.query(`SELECT id FROM roles WHERE title = ${answers.employeeRole};`);
             db.query(`INSERT INTO employees (first_name, last_name, role_id)
             VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${selectedRole});`);
+            console.log('New department successfully created!')
             homeScreen()
         })
     }
@@ -195,6 +200,7 @@ function homeScreen() {
             const newRole = db.query(`SELECT id FROM roles WHERE title = ${answers.newEmployeeRole};`)
             db.query(`UPDATE employees SET role_id = ${newRole} 
             WHERE CONCAT(first_name, " ", last_name) = ${answers.employeeName};`)
+            console.log('Employee role successfully updated!')
             homeScreen()
         })
     }
