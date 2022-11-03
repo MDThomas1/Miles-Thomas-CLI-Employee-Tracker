@@ -76,6 +76,7 @@ function beginApp() {
     }
 
     function addRole() {
+        const departmentList = db.query(`SELECT name FROM departments`)
         inquirer 
         .prompt([
             {
@@ -85,8 +86,9 @@ function beginApp() {
             },
             {
                 name: 'roleDepartment',
-                type: 'input',
-                message: 'What department does your new role belong to?'
+                type: 'list',
+                message: 'What department does your new role belong to?',
+                choices: departmentList
             },
             {
                 name: 'roleSalary',
@@ -95,8 +97,9 @@ function beginApp() {
             }
         ])
         .then((answers) => {
+            const selectedDepartment = db.query(`SELECT id FROM departments WHEN name = ${answers.roleDepartment}`)
             db.query(`INSERT INTO roles (title, salary, department_id)
-            VALUES (${answers.roleName}, ${answers.roleSalary}, ${answers.roleDepartment})`)
+            VALUES (${answers.roleName}, ${answers.roleSalary}, ${selectedDepartment})`)
         })
 
         beginApp()
@@ -138,6 +141,7 @@ function beginApp() {
     }
 
     function addEmployee() {
+        const roleList = db.query(`SELECT title FROM roles`)
         inquirer 
         .prompt([
             {
@@ -153,12 +157,14 @@ function beginApp() {
             {
                 name: 'employeeRole',
                 type: 'list',
-                message: "What role does the new employee have?"
+                message: "What role does the new employee have?",
+                choices: roleList
             }
         ])
         .then((answers) => {
+            const selectedRole = db.query(`SELECT id FROM roles WHEN title = ${answers.employeeRole}`)
             db.query(`INSERT INTO employees (first_name, last_name, role_id)
-            VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${answers.employeeRole})`)
+            VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${selectedRole})`)
         })
 
         beginApp()
