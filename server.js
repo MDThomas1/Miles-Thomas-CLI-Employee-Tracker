@@ -17,15 +17,13 @@ const db = mysql.createConnection(
     }
 );
 
-app.listen(PORT, () => {
+/*app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
-});
+});*/
 
 function beginApp() {
 
 function homeScreen() {
-
-    db.query(`SOURCE db/schema.sql;`)
 
     inquirer
     .prompt([
@@ -80,9 +78,8 @@ function homeScreen() {
         FROM roles
         INNER JOIN departments ON roles.department_id = departments.id;`, function (err, results) {
             console.log(results)
+            homeScreen()
         })
-
-        homeScreen()
     }
 
     function addRole() {
@@ -110,17 +107,15 @@ function homeScreen() {
             const selectedDepartment = db.query(`SELECT id FROM departments WHERE name = ${answers.roleDepartment};`)
             db.query(`INSERT INTO roles (title, salary, department_id)
             VALUES (${answers.roleName}, ${answers.roleSalary}, ${selectedDepartment});`)
+            homeScreen()
         })
-
-        homeScreen()
     }
 
     function viewDepartments() {
         db.query('SELECT name FROM departments AS Departments;', function (err, results) {
             console.log(results)
+            homeScreen()
         })
-
-        homeScreen()
     }
 
     function addDepertment() {
@@ -135,9 +130,8 @@ function homeScreen() {
         .then((answers) => {
             db.query(`INSERT INTO departments (name) 
             VALUES (${answers.departmentName});`)
+            homeScreen()
         })
-
-        homeScreen()
     }
 
     function viewEmployees() {
@@ -145,9 +139,8 @@ function homeScreen() {
         FROM employees
         INNER JOIN roles ON employees.role_id = roles.id;`, function (err, results) {
             console.log(results)
+            homeScreen()
         })
-
-        homeScreen()
     }
 
     function addEmployee() {
@@ -175,9 +168,8 @@ function homeScreen() {
             const selectedRole = db.query(`SELECT id FROM roles WHERE title = ${answers.employeeRole};`);
             db.query(`INSERT INTO employees (first_name, last_name, role_id)
             VALUES (${answers.employeeFirstName}, ${answers.employeeLastName}, ${selectedRole});`);
+            homeScreen()
         })
-
-        homeScreen()
     }
 
     function updateEmployeeRole() {
@@ -203,9 +195,8 @@ function homeScreen() {
             const newRole = db.query(`SELECT id FROM roles WHERE title = ${answers.newEmployeeRole};`)
             db.query(`UPDATE employees SET role_id = ${newRole} 
             WHERE CONCAT(first_name, " ", last_name) = ${answers.employeeName};`)
+            homeScreen()
         })
-
-        homeScreen()
     }
 
     function endApp() {
